@@ -19,24 +19,27 @@ type P = { x: number; y: number; z: number; c: THREE.Color; s?: number }
 const C = (hex: string, k = 1) => new THREE.Color(hex).multiplyScalar(k)
 
 export const PAL = {
-  mint: C('#38d996'),
-  mintDeep: C('#17905e'),
-  mintPale: C('#a6f7d2'),
-  cream: C('#f1fff7'),
-  ink: C('#0b2a1e'),
-  red: C('#ff5b6b'),
-  redDeep: C('#b8243a'),
-  portal: C('#b46bff', 1.35),
-  portalHot: C('#e7b8ff', 1.5),
-  obsidian: C('#1d1530'),
-  grass: C('#4fbf52'),
-  grassDark: C('#2f8a3b'),
-  stone: C('#9aa7a0'),
-  glass: C('#cffff0', 1.15),
-  wood: C('#8a5a2b'),
-  woodDark: C('#5e3a19'),
-  gold: C('#ffd35a'),
-  blush: C('#ff9db0'),
+  // leaf green + white candy, oak and gold accents, diamond-blue touches
+  mint: C('#3f8f55'),
+  mintDeep: C('#24583a'),
+  mintPale: C('#cfe6cf'),
+  cream: C('#fbf8f0'),
+  ink: C('#1d2a20'),
+  red: C('#d9a52b'), // bounty target uses gold now
+  redDeep: C('#9c7318'),
+  portal: C('#3f8fd8', 1.1),
+  portalHot: C('#a9d6ff', 1.15),
+  obsidian: C('#24304a'),
+  grass: C('#5f9a4c'),
+  grassDark: C('#3f7a3a'),
+  stone: C('#b8a98e'),
+  glass: C('#bfe2ff'),
+  wood: C('#a87b4f'),
+  woodDark: C('#7a5533'),
+  gold: C('#e0b33a'),
+  blush: C('#e59a8a'),
+  diamond: C('#5fc4e8'),
+  diamondDeep: C('#2e86b5'),
 }
 
 // Seeded RNG so formations are identical on every load.
@@ -108,7 +111,7 @@ export function mintPoints(R = 10): P[] {
       const wedge = Math.floor(((a + Math.PI) / (Math.PI * 2)) * 8 + 0.5) % 2
       let c = wedge ? PAL.mint : PAL.cream
       if (d < R * 0.28) c = PAL.cream
-      if (d > R - 0.75) c = PAL.mintDeep
+      if (d > R - 0.75) c = R > 6 ? PAL.gold : PAL.mintDeep
       const half = d < R * 0.45 ? 2 : d < R * 0.72 ? 1 : 0
       for (let z = -half; z <= half; z++) {
         // faces keep the pattern, the hidden core goes pale to read as candy
@@ -226,7 +229,7 @@ function dice() {
         if (x === S && isPip('x', z, y)) c = PAL.mintDeep
         if (y === S && isPip('y', x, z)) c = PAL.mintDeep
         const corner = [x, y, z].filter((k) => Math.abs(k) === S).length >= 2
-        if (corner && c === PAL.cream) c = PAL.mintPale
+        if (corner && c === PAL.cream) c = PAL.gold
         pts.push({ x: x * 1.15, y: y * 1.15, z: z * 1.15, c })
       }
   return pack(pts, 6, { glow: C('#ffd35a'), rot: new THREE.Euler(0.55, 0.7, 0.1) })
@@ -239,7 +242,7 @@ function pickaxe() {
     for (let y = 0; y < 18; y++) {
       const d = Math.hypot(x - 1, y - 16)
       let c: THREE.Color | null = null
-      if (d >= 11.2 && d <= 14 && x >= 2 && y <= 14 && x + y >= 11) c = d > 13.1 ? PAL.mintDeep : d < 11.9 ? PAL.mintPale : PAL.mint
+      if (d >= 11.2 && d <= 14 && x >= 2 && y <= 14 && x + y >= 11) c = d > 13.1 ? PAL.diamondDeep : d < 11.9 ? PAL.cream : PAL.diamond
       const onHandle = x >= 1 && x <= 10 && (x + y === 17 || x + y === 18)
       if (onHandle && !c) c = x + y === 17 ? PAL.wood : PAL.woodDark
       if (!c) continue
@@ -302,7 +305,7 @@ const ARROW = [
 ]
 
 function arrow() {
-  const pts = sprite(ARROW, { S: PAL.mintDeep, L: C('#5dffb9', 1.2), T: PAL.cream }, (ch) => (ch === 'T' ? [-1, 0, 1] : [-1, 0]))
+  const pts = sprite(ARROW, { S: PAL.mintDeep, L: PAL.mint, T: PAL.gold }, (ch) => (ch === 'T' ? [-1, 0, 1] : [-1, 0]))
   return pack(pts, 9, { glow: C('#3dffad'), rot: new THREE.Euler(-0.12, 0.3, 0) })
 }
 
@@ -321,7 +324,7 @@ const CHECK = [
 ]
 
 function check() {
-  const pts = sprite(CHECK, { L: C('#6dffc2', 1.25) }, 3)
+  const pts = sprite(CHECK, { L: PAL.mint }, 3)
   return pack(
     pts.map((p) => ({ ...p, x: p.x * 1.2, y: p.y * 1.2 })),
     10,

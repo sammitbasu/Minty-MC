@@ -36,7 +36,7 @@ function Dust({ count = 220 }) {
   return (
     <instancedMesh ref={ref} args={[undefined, undefined, count]} frustumCulled={false}>
       <boxGeometry />
-      <meshBasicMaterial color="#7dffc8" transparent opacity={0.55} />
+      <meshBasicMaterial color="#fffaf0" transparent opacity={0.7} />
     </instancedMesh>
   )
 }
@@ -58,11 +58,10 @@ export default function Scene({ children }: { children: ReactNode }) {
         camera={{ position: [0, 0, 36], fov: 35 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
-        <fog attach="fog" args={['#04110c', 34, 70]} />
-        <hemisphereLight args={['#e9fff5', '#0b3a26', 1.1]} />
-        <directionalLight position={[8, 12, 14]} intensity={2.2} color="#ffffff" />
-        <directionalLight position={[-14, -6, 4]} intensity={0.8} color="#5cffbe" />
-        <pointLight position={[0, 0, 12]} intensity={40} distance={40} color="#bfffe4" />
+        <fog attach="fog" args={['#e4d3b4', 36, 72]} />
+        <hemisphereLight args={['#fffaf0', '#8a6a44', 1.35]} />
+        <directionalLight position={[10, 14, 16]} intensity={2.4} color="#fff4dc" />
+        <directionalLight position={[-14, -4, 6]} intensity={0.45} color="#9fc9ff" />
         <CameraRig />
         <Dust />
         {children}

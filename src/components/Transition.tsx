@@ -1,3 +1,4 @@
+import { route } from '../lib/base'
 import { createContext, useCallback, useContext, useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -67,7 +68,7 @@ export function TLink({ to, children, className, ...rest }: { to: string; childr
   const { go } = useTransitionNav()
   return (
     <a
-      href={to}
+      href={route(to)}
       className={className}
       onClick={(e: MouseEvent) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey) return

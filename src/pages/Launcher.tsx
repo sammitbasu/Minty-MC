@@ -1,3 +1,4 @@
+import { asset } from '../lib/base'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Scene from '../three/Scene'
 import VoxelSwarm, { type Stage } from '../three/VoxelSwarm'
@@ -9,11 +10,11 @@ import { LAUNCHER } from '../config/launcher'
 import { LAUNCHER_FEATURES, SERVER } from '../data/server'
 
 const SHOTS = [
-  { src: '/images/mint-launcher-screenshot.webp', alt: 'An instance’s mod list with update buttons' },
-  { src: '/images/mint-launcher-screenshot2.webp', alt: 'Browse Mods window with Modrinth search results' },
-  { src: '/images/mint-launcher-screenshot3.webp', alt: 'Sign-in screen with Offline and Microsoft account options' },
-  { src: '/images/mint-launcher-screenshot4.webp', alt: 'Settings with background themes and transparency sliders' },
-  { src: '/images/mint-launcher-screenshot5.webp', alt: 'An instance running, with a Stop button and live status' },
+  { src: asset('/images/mint-launcher-screenshot.webp'), alt: 'An instance’s mod list with update buttons' },
+  { src: asset('/images/mint-launcher-screenshot2.webp'), alt: 'Browse Mods window with Modrinth search results' },
+  { src: asset('/images/mint-launcher-screenshot3.webp'), alt: 'Sign-in screen with Offline and Microsoft account options' },
+  { src: asset('/images/mint-launcher-screenshot4.webp'), alt: 'Settings with background themes and transparency sliders' },
+  { src: asset('/images/mint-launcher-screenshot5.webp'), alt: 'An instance running, with a Stop button and live status' },
 ]
 
 type DlState = 'idle' | 'checking' | 'done' | 'fallback'
@@ -162,7 +163,7 @@ export default function LauncherPage() {
           <div className="copy">
             <Reveal>
               <p className="eyebrow">
-                <img src="/images/mint-launcher-icon.png" alt="" width={22} height={22} /> Mint Launcher
+                <img src={asset('/images/mint-launcher-icon.png')} alt="" width={22} height={22} /> Mint Launcher
                 {version && <span className="pill">{version}</span>}
                 <span className="pill pill--soft">Open source</span>
               </p>
@@ -175,7 +176,7 @@ export default function LauncherPage() {
             </Reveal>
             <Reveal delay={0.35} className="dl">
               <button
-                className={`btn btn--mint btn--xl dl__btn is-${dl}`}
+                className={`btn btn--gold btn--xl dl__btn is-${dl}`}
                 onClick={download}
                 onPointerEnter={() => dl === 'idle' && (target.current = 1)}
                 onPointerLeave={() => dl === 'idle' && (target.current = 0)}
@@ -242,7 +243,7 @@ export default function LauncherPage() {
             ))}
           </ol>
           <Reveal className="actions actions--center">
-            <button className="btn btn--mint btn--xl" onClick={() => window.dispatchEvent(new CustomEvent('minty:scrollto', { detail: 0 }))}>
+            <button className="btn btn--gold btn--xl" onClick={() => window.dispatchEvent(new CustomEvent('minty:scrollto', { detail: 0 }))}>
               <PixelIcon name="download" size={18} /> Back to download
             </button>
             <CopyIp />

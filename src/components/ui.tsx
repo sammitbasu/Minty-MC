@@ -3,17 +3,18 @@ import { motion } from 'framer-motion'
 import PixelIcon from './PixelIcon'
 import { SERVER } from '../data/server'
 
-const ease = [0.22, 1, 0.36, 1] as const
+// strong ease-out: fast start, gentle settle
+const ease = [0.23, 1, 0.32, 1] as const
 
-export function Reveal({ children, delay = 0, y = 28, as = 'div', className }: { children: ReactNode; delay?: number; y?: number; as?: ElementType; className?: string }) {
+export function Reveal({ children, delay = 0, y = 16, as = 'div', className }: { children: ReactNode; delay?: number; y?: number; as?: ElementType; className?: string }) {
   const M = motion[as as 'div']
   return (
     <M
       className={className}
-      initial={{ opacity: 0, y, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, y, filter: 'blur(4px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: false, amount: 0.35 }}
-      transition={{ duration: 0.9, delay, ease }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay, ease }}
     >
       {children}
     </M>
@@ -32,13 +33,13 @@ export function Headline({ text, className, as: Tag = 'h2' }: { text: string; cl
       aria-label={text}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.4 }}
-      variants={{ show: { transition: { staggerChildren: 0.06 } } }}
+      viewport={{ once: true, amount: 0.4 }}
+      variants={{ show: { transition: { staggerChildren: 0.045 } } }}
     >
       {words.map((w, i) => (
         <Fragment key={i}>
           <span className="word" aria-hidden>
-            <motion.span variants={{ hidden: { y: '110%' }, show: { y: '0%', transition: { duration: 0.85, ease } } }}>{w}</motion.span>
+            <motion.span variants={{ hidden: { y: '110%' }, show: { y: '0%', transition: { duration: 0.65, ease } } }}>{w}</motion.span>
           </span>
           {i < words.length - 1 ? ' ' : null}
         </Fragment>

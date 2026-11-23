@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { useLocation } from 'react-router-dom'
+import { asset, route } from '../lib/base'
 import PixelIcon, { type IconName } from './PixelIcon'
 import { useTransitionNav } from './Transition'
 import { sectionStore, scrollState } from '../three/store'
@@ -70,7 +71,7 @@ export default function GlassNav() {
         <div className="glass-nav__shine" aria-hidden />
 
         <button className="glass-nav__logo" onClick={() => go('/#top')} aria-label="MintyMC home">
-          <img src="/images/mascot.png" alt="" width={34} height={34} />
+          <img src={asset('/images/mascot.png')} alt="" width={34} height={34} />
         </button>
 
         <div className="glass-nav__track">
@@ -78,7 +79,7 @@ export default function GlassNav() {
           {ITEMS.map((item, i) => (
             <a
               key={item.label}
-              href={item.to}
+              href={route(item.to)}
               className={`glass-nav__item ${i === activeIdx ? 'is-active' : ''}`}
               aria-current={i === activeIdx ? 'true' : undefined}
               onClick={(e) => {
@@ -106,7 +107,7 @@ export default function GlassNav() {
         </div>
 
         <a
-          href="/launcher"
+          href={route('/launcher')}
           className={`glass-nav__cta ${onLauncher ? 'is-active' : ''}`}
           onClick={(e) => {
             e.preventDefault()

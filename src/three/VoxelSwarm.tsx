@@ -103,7 +103,6 @@ export default function VoxelSwarm({ stages, getTarget, getSpin, intro = true }:
       plane: new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
       hit: new THREE.Vector3(),
       local: new THREE.Vector3(),
-      glow: new THREE.Color(),
       ndc: new THREE.Vector2(),
     }),
     [],
@@ -174,7 +173,7 @@ export default function VoxelSwarm({ stages, getTarget, getSpin, intro = true }:
     g.worldToLocal(tmp.local)
     const lx = tmp.local.x
     const ly = tmp.local.y
-    pointer.hovering = Math.hypot(lx, ly) < 12
+    pointer.hovering = Math.hypot(lx, ly) < 9.5
     sim.burst *= Math.pow(0.08, dt)
 
     const jit = THREE.MathUtils.lerp(FA.jitter, FB.jitter, tt)
@@ -242,24 +241,23 @@ export default function VoxelSwarm({ stages, getTarget, getSpin, intro = true }:
     m.instanceMatrix.needsUpdate = true
     if (m.instanceColor) m.instanceColor.needsUpdate = true
 
-    tmp.glow.copy(FA.glow).lerp(FB.glow, tt)
+    // grounded contact shadow instead of a glow: sits under the object
     const hm = halo.current.material as THREE.MeshBasicMaterial
-    hm.color.copy(tmp.glow)
-    hm.opacity = 0.32 + Math.sin(t * 1.2) * 0.04 + sim.burst * 0.3
-    halo.current.position.set(g.position.x, g.position.y, -8)
-    halo.current.scale.setScalar(sc * 34 * (1 + sim.burst * 0.25))
+    hm.opacity = 0.2 - sim.burst * 0.08
+    halo.current.position.set(g.position.x, g.position.y - 10.5 * sc, -2)
+    halo.current.scale.set(sc * 26 * (1 + sim.burst * 0.3), sc * 4.2, 1)
   })
 
   return (
     <>
       <mesh ref={halo}>
         <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial map={haloTex} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial map={haloTex} color="#4a3520" transparent depthWrite={false} />
       </mesh>
       <group ref={group}>
         <instancedMesh ref={mesh} args={[undefined, undefined, N]} frustumCulled={false}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial map={tex} roughness={0.55} metalness={0.05} />
+          <meshStandardMaterial map={tex} roughness={0.62} metalness={0.02} />
         </instancedMesh>
       </group>
     </>

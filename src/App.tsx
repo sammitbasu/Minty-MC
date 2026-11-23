@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import GlassNav from './components/GlassNav'
+import Cursor from './components/Cursor'
 import { TransitionProvider } from './components/Transition'
 import { Toaster } from './components/ui'
 import Home from './pages/Home'
@@ -56,8 +57,6 @@ export default function App() {
   return (
     <TransitionProvider>
       <div className="bg" aria-hidden>
-        <div className="bg__glow bg__glow--a" />
-        <div className="bg__glow bg__glow--b" />
         <div className="bg__grid" />
       </div>
       <GlassNav />
@@ -68,6 +67,7 @@ export default function App() {
       </Routes>
       <Toaster />
       <div className="grain" aria-hidden />
+      <Cursor />
     </TransitionProvider>
   )
 }

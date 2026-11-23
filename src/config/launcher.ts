@@ -1,3 +1,4 @@
+import { asset } from '../lib/base'
 // ─────────────────────────────────────────────────────────────────────────────
 // Mint Launcher download settings.
 //
@@ -15,7 +16,7 @@ export const LAUNCHER = {
   releasesUrl: 'https://github.com/m3l0ncru2t/Mint-Launcher/releases/latest',
 
   windows: {
-    file: '/downloads/MintLauncher-Setup.exe',
+    file: asset('/downloads/MintLauncher-Setup.exe'),
     saveAs: 'MintLauncher-Setup.exe',
   },
 

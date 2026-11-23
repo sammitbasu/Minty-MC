@@ -1,3 +1,4 @@
+import { asset } from '../lib/base'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Scene from '../three/Scene'
 import VoxelSwarm, { type Stage } from '../three/VoxelSwarm'
@@ -147,7 +148,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.4} className="actions">
               <CopyIp big />
-              <TLink to="/launcher" className="btn btn--mint">
+              <TLink to="/launcher" className="btn btn--gold">
                 <PixelIcon name="download" size={16} /> Get Mint Launcher
               </TLink>
               <a className="btn btn--ghost" href={SERVER.discord} target="_blank" rel="noopener noreferrer">
@@ -299,7 +300,7 @@ export default function Home() {
           <div className="copy">
             <Reveal>
               <p className="kicker">
-                <img src="/images/mascot.png" alt="" width={18} height={18} className="inline-mascot" /> Minty Client · Fabric 26.3
+                <img src={asset('/images/mascot.png')} alt="" width={18} height={18} className="inline-mascot" /> Minty Client · Fabric 26.3
               </p>
             </Reveal>
             <Headline className="title" text="Your client, minted." />
@@ -328,7 +329,7 @@ export default function Home() {
               </p>
             </Reveal>
             <Reveal delay={0.3} className="actions actions--center">
-              <TLink to="/launcher" className="btn btn--mint btn--xl">
+              <TLink to="/launcher" className="btn btn--gold btn--xl">
                 <PixelIcon name="download" size={18} /> Get Mint Launcher
               </TLink>
               <CopyIp />
