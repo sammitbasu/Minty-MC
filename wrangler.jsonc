@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static site on Cloudflare Workers (static assets, no server code).
+  "name": "mintymc",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    // React Router handles /launcher etc: unknown navigations get index.html,
+    // while missing files (e.g. an .exe that isn't uploaded yet) still 404.
+    "not_found_handling": "single-page-application"
+  },
+  "observability": { "enabled": true }
+  // Custom domain, once the zone is on Cloudflare:
+  // "routes": [{ "pattern": "mintymc.xyz", "custom_domain": true }]
+}
