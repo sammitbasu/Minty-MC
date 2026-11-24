@@ -24,6 +24,7 @@ export default function Cursor() {
     let raf = 0
     let state = ''
     let visible = false
+    let base = ''
 
     const setState = (s: string) => {
       if (s === state) return
@@ -43,10 +44,7 @@ export default function Cursor() {
       }
       dot.current!.style.transform = `translate3d(${x}px, ${y}px, 0)`
       const el = e.target as HTMLElement
-      if (el.closest('a, button, [role="tab"]')) setState('link')
-      else if (el.closest('p, li, h1, h2, h3, code')) setState('text')
-      else if (pointer.hovering && document.querySelector('.scene')) setState('mint')
-      else setState('')
+      base = el.closest('a, button, [role="tab"]') ? 'link' : el.closest('p, li, h1, h2, h3, code') ? 'text' : ''
     }
     const down = () => document.documentElement.classList.add('cursor-down')
     const up = () => document.documentElement.classList.remove('cursor-down')
@@ -60,6 +58,8 @@ export default function Cursor() {
       rx += (x - rx) * k
       ry += (y - ry) * k
       ring.current!.style.transform = `translate3d(${rx}px, ${ry}px, 0)`
+      // the mint moves under a still pointer, so re-check every frame
+      setState(base || (pointer.hovering && document.querySelector('.scene') ? 'mint' : ''))
       raf = requestAnimationFrame(loop)
     }
 

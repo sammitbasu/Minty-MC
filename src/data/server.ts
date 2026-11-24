@@ -117,3 +117,58 @@ export const LAUNCHER_FEATURES = [
   { name: 'Themes', text: 'Custom themes, backgrounds and transparency, so it looks the way you want.' },
   { name: 'Auto-updating', text: 'Installed and portable builds both check for and install updates.' },
 ]
+
+// ── Pages ported from mintymc.xyz ─────────────────────────────────────────
+
+export const ABOUT_FULL = [
+  'MintyMC Anarchy+ is a community driven survival experience built for players who want freedom without the chaos of full anarchy.',
+  'We blend classic vanilla gameplay with custom features like bosses, bounties, clans and telepads, all designed to keep the world dangerous, unpredictable, and fun.',
+  'Built around player choice, risk, and emergent gameplay: raid, loot, fight, explore, build, or scheme, as long as you follow the core rules that keep the server stable and fair.',
+  'Got an idea, a feature request, or a wild concept? Tell an admin or drop it in the Discord.',
+]
+
+export const GUIDE = [
+  {
+    id: 'join',
+    title: 'How to join',
+    text: 'Open Minecraft Java Edition, then Multiplayer → Add Server → mintymc.xyz. No mods required. No whitelist. Just join and play.',
+  },
+  {
+    id: 'settings',
+    title: 'Recommended settings',
+    text: 'MintyMC is built around vanilla. Use default settings, turn shaders off, add Sodium if you like, and keep render distance around 8–12.',
+  },
+  { id: 'telepads', title: 'Telepads', text: '1 free telepad when you join, up to 10 over time. Place them anywhere and explore without losing your base.', cmd: '/teleset' },
+  { id: 'clans', title: 'Clans', text: 'Share bases, teleport to clanmates and talk in private clan chat. Optional: solo is fine too.', cmd: '/clan create' },
+  { id: 'bounties', title: 'Bounties', text: 'Put items or money on someone’s head. Whoever kills the target claims it.', cmd: '/bounty' },
+  { id: 'spawn', title: 'Protected spawn', text: 'A 200 × 200 safe zone: no griefing, PvP, stealing or block breaking. Step outside and full anarchy applies.' },
+  { id: 'villagers', title: 'Custom villagers', text: 'Rare items, custom gear, special utilities and rotating trades, found in certain structures and events.' },
+  { id: 'gambling', title: 'Gambling', text: 'Wager items or in-game currency for fun. No real money, no purchases, no pay-to-win.' },
+  {
+    id: 'anarchy',
+    title: 'Anarchy+ explained',
+    text: 'Vanilla Minecraft plus classic anarchy rules plus extras like telepads, clans, bounties and custom villagers. The chaos stays; the depth goes up.',
+  },
+]
+
+export const MODS = [
+  { name: 'Sodium', what: 'Rendering engine. Big FPS gains.', url: 'https://modrinth.com/mod/sodium' },
+  { name: 'Lithium', what: 'Faster game logic and physics.', url: 'https://modrinth.com/mod/lithium' },
+  { name: 'Starlight', what: 'Rewritten, much faster lighting.', url: 'https://modrinth.com/mod/starlight' },
+  { name: 'FerriteCore', what: 'Cuts memory usage.', url: 'https://modrinth.com/mod/ferrite-core' },
+  { name: 'Entity Culling', what: 'Skips rendering what you can’t see.', url: 'https://modrinth.com/mod/entityculling' },
+  { name: 'LazyDFU', what: 'Faster game start-up.', url: 'https://modrinth.com/mod/lazydfu' },
+]
+
+export const GALLERY = [
+  { group: 'Server Builds', shots: ['build1', 'build2'] },
+  { group: 'Boss Fights', shots: ['boss1', 'boss2'] },
+  { group: 'Spawn Showcase', shots: ['spawn1', 'spawn2', 'spawn3', 'spawn4', 'spawn5', 'spawn6'] },
+]
+
+export const CLIENT_INSTALL = [
+  'Install Fabric Loader 0.17+ for Minecraft 26.3 (Java 25 or newer) from fabricmc.net.',
+  'Download Fabric API for 26.3 and the Minty Client JAR.',
+  'Put both JARs in .minecraft/mods. For Minty Shaders, add Sodium and Iris too.',
+  'Launch the Fabric profile and press Right Shift.',
+]

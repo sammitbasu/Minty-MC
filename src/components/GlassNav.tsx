@@ -1,19 +1,20 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { asset, route } from '../lib/base'
 import PixelIcon, { type IconName } from './PixelIcon'
 import { useTransitionNav } from './Transition'
-import { sectionStore, scrollState } from '../three/store'
+import { scrollState } from '../three/store'
 
-type Item = { label: string; icon: IconName; to: string; sections: number[] }
+type Item = { label: string; icon: IconName; to: string }
 
+// One entry per page from mintymc.xyz. The launcher lives in the gold button.
 const ITEMS: Item[] = [
-  { label: 'Home', icon: 'home', to: '/#top', sections: [0] },
-  { label: 'Anarchy+', icon: 'sword', to: '/#anarchy', sections: [1] },
-  { label: 'Features', icon: 'gem', to: '/#bounties', sections: [2, 3, 4, 6] },
-  { label: 'Spawn', icon: 'shield', to: '/#spawn', sections: [5] },
-  { label: 'Rules', icon: 'scroll', to: '/#rules', sections: [7] },
-  { label: 'Minty Client', icon: 'drop', to: '/#client', sections: [8] },
+  { label: 'Home', icon: 'home', to: '/' },
+  { label: 'Getting Started', icon: 'book', to: '/guide' },
+  { label: 'Gallery', icon: 'image', to: '/gallery' },
+  { label: 'Minty Client', icon: 'drop', to: '/client' },
+  { label: 'Optional Mods', icon: 'wrench', to: '/mods' },
+  { label: 'About Us', icon: 'heart', to: '/about' },
 ]
 
 const ITEM_H = 52
@@ -26,13 +27,13 @@ const supportsLiquid = typeof navigator !== 'undefined' && /Chrome|Chromium|Edg\
 export default function GlassNav() {
   const { pathname } = useLocation()
   const { go } = useTransitionNav()
-  const section = useSyncExternalStore(sectionStore.subscribe, sectionStore.get)
   const navRef = useRef<HTMLElement>(null)
   const progRef = useRef<HTMLDivElement>(null)
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
 
   const onLauncher = pathname.startsWith('/launcher')
-  const activeIdx = onLauncher ? ITEMS.length : section >= 9 ? ITEMS.length : Math.max(0, ITEMS.findIndex((i) => i.sections.includes(section)))
+  const found = ITEMS.findIndex((i) => (i.to === '/' ? pathname === '/' : pathname.startsWith(i.to)))
+  const activeIdx = found === -1 ? ITEMS.length : found
 
   // specular highlight follows the cursor across the glass
   useEffect(() => {
@@ -70,7 +71,7 @@ export default function GlassNav() {
         <div className="glass-nav__refract" aria-hidden />
         <div className="glass-nav__shine" aria-hidden />
 
-        <button className="glass-nav__logo" onClick={() => go('/#top')} aria-label="MintyMC home">
+        <button className="glass-nav__logo" onClick={() => go('/')} aria-label="MintyMC home">
           <img src={asset('/images/mascot.png')} alt="" width={34} height={34} />
         </button>
 

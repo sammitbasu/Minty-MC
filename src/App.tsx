@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import GlassNav from './components/GlassNav'
 import Cursor from './components/Cursor'
@@ -7,6 +7,7 @@ import { TransitionProvider } from './components/Transition'
 import { Toaster } from './components/ui'
 import Home from './pages/Home'
 import LauncherPage from './pages/Launcher'
+import { AboutPage, ClientPage, GalleryPage, GuidePage, ModsPage } from './pages/SubPages'
 import { scrollState } from './three/store'
 
 export default function App() {
@@ -63,6 +64,19 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/launcher" element={<LauncherPage />} />
+        <Route path="/guide" element={<GuidePage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/client" element={<ClientPage />} />
+        <Route path="/mods" element={<ModsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        {/* old mintymc.xyz URLs keep working */}
+        <Route path="/index.html" element={<Navigate to="/" replace />} />
+        <Route path="/launcher.html" element={<Navigate to="/launcher" replace />} />
+        <Route path="/getting-started.html" element={<Navigate to="/guide" replace />} />
+        <Route path="/gallery.html" element={<Navigate to="/gallery" replace />} />
+        <Route path="/minty-client.html" element={<Navigate to="/client" replace />} />
+        <Route path="/mods.html" element={<Navigate to="/mods" replace />} />
+        <Route path="/about.html" element={<Navigate to="/about" replace />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Toaster />

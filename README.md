@@ -21,6 +21,7 @@ The whole site centres on one object: **the Mint**, a peppermint candy made of a
 
 - `/`: the scroll story.
 - `/launcher`: the Mint Launcher page. Hovering the download button turns the mint into an arrow, and clicking it downloads the installer and shows a checkmark.
+- `/guide`, `/gallery`, `/client`, `/mods`, `/about`: ports of the other mintymc.xyz pages. Old URLs like `/gallery.html` redirect to them.
 
 ## Develop
 

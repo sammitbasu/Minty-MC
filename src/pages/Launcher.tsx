@@ -6,6 +6,7 @@ import { getFormations } from '../three/formations'
 import { scrollState } from '../three/store'
 import { CopyIp, Headline, Reveal, toast } from '../components/ui'
 import PixelIcon from '../components/PixelIcon'
+import { Footer } from '../components/Shell'
 import { LAUNCHER } from '../config/launcher'
 import { LAUNCHER_FEATURES, SERVER } from '../data/server'
 
@@ -256,17 +257,8 @@ export default function LauncherPage() {
               </a>
             ))}
           </Reveal>
-          <footer className="footer">
-            <span>Requires Windows 10+, macOS 11+, or a reasonably modern Linux distro.</span>
-            <span className="footer__links">
-              <a href={LAUNCHER.releasesUrl} target="_blank" rel="noopener noreferrer">
-                Release notes
-              </a>
-              <a href={SERVER.discord} target="_blank" rel="noopener noreferrer">
-                Discord
-              </a>
-            </span>
-          </footer>
+          <p className="fine fine--center">Requires Windows 10+, macOS 11+, or a reasonably modern Linux distro.</p>
+          <Footer />
         </section>
       </main>
     </>
